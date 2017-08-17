@@ -10,18 +10,20 @@ var User = require("./models/user");
 //app config
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/authDemo", {useMongoClient: true});
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(require("express-session")({
   secret: "I am the secret!",
   resave: false,
   saveUninitialized: false
 }));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
-app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 //=====routes======
@@ -41,7 +43,7 @@ app.get("/register", function(req, res) {
 });
 
 
-//handling user sign up
+  //handling user sign up
 app.post("/register", function(req, res) {
   req.body.username
   req.body.password
@@ -57,7 +59,18 @@ app.post("/register", function(req, res) {
   });
 });
 
+  //login Routes
+app.get("/login", function(req, res) {
+  res.render("login");
+});
 
+  //login logic
+  app.post("/login", passport.authenticate("local", {
+    successRedirect: "/secret",
+    failureRedirect: "/login"
+  }), function(req, res) {
+
+  });
 
 app.listen(3000, function() {
   console.log("Auth server started!");
