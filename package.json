@@ -1,0 +1,29 @@
+{
+  "name": "authdemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anygivensolutions/auth-Demo.git"
+  },
+  "author": "Dom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anygivensolutions/auth-Demo/issues"
+  },
+  "homepage": "https://github.com/anygivensolutions/auth-Demo#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "mongoose": "^4.11.7",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.1.0"
+  }
+}
